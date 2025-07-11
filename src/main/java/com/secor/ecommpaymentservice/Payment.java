@@ -22,7 +22,7 @@ public class Payment
     private String customerId;
     private String paymentMethod;
     private BigDecimal amount;
-    private String status; // PENDING, COMPLETED, FAILED
+    private String status; // PENDING, COMPLETED, FAILED, REFUND_INITIATED,REFUNDED
     private LocalDateTime paymentDate;
     private LocalDateTime updatedAt;
 }

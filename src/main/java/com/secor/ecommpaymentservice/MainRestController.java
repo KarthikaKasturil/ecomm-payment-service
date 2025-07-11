@@ -18,6 +18,8 @@ public class MainRestController {
 
     @Autowired
     private PaymentRepository paymentRepository;
+    @Autowired
+    private PaymentService paymentService;
 
     @GetMapping
     public List<Payment> getAllPayments() {
@@ -43,6 +45,12 @@ public class MainRestController {
         return paymentRepository.findByOrderId(orderId);
     }
 
+    @PostMapping("/save")
+    public Payment addPayment(@RequestBody Payment payment) {
+        LOG.info("addPayment for payment {}", payment);
+        return paymentRepository.save(payment);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<?> createPayment(@RequestBody Payment payment) {
         LOG.info("createPayment({})", payment);
@@ -58,12 +66,12 @@ public class MainRestController {
         return ResponseEntity.ok("Payment created for order " + savedPayment.getOrderId());
     }
 
-    @PutMapping("/update/payment/status")
+    @PutMapping("/update/status")
     public ResponseEntity<?> updatePaymentStatus(@RequestBody PaymentStatus status) {
         LOG.info("updatePaymentStatus({})", status);
         Payment payment = paymentRepository.findByOrderId(status.getOrderId());
         if (payment != null) {
-           payment.setStatus(payment.getStatus());
+           payment.setStatus(status.getStatus());
            payment.setUpdatedAt(LocalDateTime.now());
            Payment updatedPayment = paymentRepository.save(payment);
               return ResponseEntity.ok("Payment status updated to " + updatedPayment.getStatus() + " for order " + updatedPayment.getOrderId());
@@ -73,4 +81,4 @@ public class MainRestController {
         }
     }
 
-}
+    }
