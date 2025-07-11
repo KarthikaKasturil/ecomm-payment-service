@@ -1,13 +1,13 @@
-package com.secor.ecommproductservice;
+package com.secor.ecommpaymentservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class EcommProductServiceApplication {
+public class EcommPaymentServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(EcommProductServiceApplication.class, args);
+        SpringApplication.run(EcommPaymentServiceApplication.class, args);
     }
 
 }
