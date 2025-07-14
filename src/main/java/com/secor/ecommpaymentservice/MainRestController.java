@@ -18,8 +18,6 @@ public class MainRestController {
 
     @Autowired
     private PaymentRepository paymentRepository;
-    @Autowired
-    private PaymentService paymentService;
 
     @GetMapping
     public List<Payment> getAllPayments() {
@@ -48,6 +46,8 @@ public class MainRestController {
     @PostMapping("/save")
     public Payment addPayment(@RequestBody Payment payment) {
         LOG.info("addPayment for payment {}", payment);
+        payment.setPaymentDate(LocalDateTime.now());
+        payment.setUpdatedAt(LocalDateTime.now());
         return paymentRepository.save(payment);
     }
 
